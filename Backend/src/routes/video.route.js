@@ -7,7 +7,8 @@ import {
     updateVideo,
     deleteVideo,
     getAllVideos,
-    viewIncrement
+    viewIncrement,
+    togglePublish
  } from "../controllers/video.controller.js";
 
 const videoRoute = Router()
@@ -38,6 +39,7 @@ videoRoute.route("/delete/:videoId").delete(
     deleteVideo
 )
 videoRoute.route("/viewIncrement/:videoId").post(viewIncrement)
+videoRoute.route("/togglePublish/:videoId").patch(verifyJWT, togglePublish)
 
 export {
     videoRoute

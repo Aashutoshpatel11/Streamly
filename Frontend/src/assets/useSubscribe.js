@@ -6,6 +6,7 @@ export default function useSubscribe(channelId) {
     const [isSubscribed, setIsSubscribed] = useState(false)
     const [subscribedChannels, setSubscribedChannels] = useState([])
     const [subscriberCount, setSubscriberCount] = useState(0)
+    const [subscriber, setSubscriber] = useState(null)
     
     const userId = useSelector( (state) => state.auth.userData._id )
     
@@ -60,6 +61,7 @@ export default function useSubscribe(channelId) {
             // console.log("FILTER", response.data.data.filter( (item) => item.subscriber == currentUser._id ).length);
             setIsSubscribed(response.data.data.filter( (item) => item.subscriber == userId ).length)
             setSubscriberCount(response.data?.data?.length)
+            setSubscriber(response.data.data)
             }
             return response
         } catch (error) {
@@ -74,6 +76,7 @@ export default function useSubscribe(channelId) {
     }, [isSubscribed] )
     return {
         subscriberCount,
+        subscriber,
         isSubscribed,
         subscribedChannels,
         toggleSubscribe

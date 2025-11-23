@@ -8,6 +8,8 @@ export const verifyJWT = asyncHandler ( async( req, _, next ) => {
     // console.log("cookies", req.cookies);
     const token = await req.cookies?.accessToken 
     // console.log("TOKEN::",req.cookies.accessToken);
+    console.log("in auth middleware");
+    
     
     if( !token ){
         throw new ApiError(404, "unauthorised request")

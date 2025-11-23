@@ -6,41 +6,6 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import mongoose from "mongoose";
 import { User } from "../models/user.model.js";
 
-// const getAllVideos = asyncHandler( async(req, res) => {
-
-//     // use paginate v2
-//     // 
-
-//     const { page = 1, limit = 10, query, sortBy, sortType, userId } = req.query
-
-//     const options = {
-//         "page" : page,
-//         "limit" : limit,
-//         "sort" : {
-//             sortBy : sortType
-//         }
-//     }
- 
-//     const result = Video.aggregatePaginate(
-//         {},
-//         options
-//     )
-
-//     if( !result ){
-//         throw new ApiError(401, "OOPs! NO video found")
-//     }
-
-//     return res
-//     .status(200)
-//     .json(
-//         new ApiResponse(
-//             200,
-//             result,
-//             "videos fetched successfully"
-//         )
-//     )
-
-// } )
 
 const getAllVideos = asyncHandler( async(req, res) => {
     
@@ -74,7 +39,8 @@ const publishAVideo = asyncHandler( async(req, res) => {
     // return response
 
     const {title, description} = req.body
-    console.log(req.files);
+    console.log("REQ BODY::TITLE::", title);
+    console.log("REQ BODY::DESCRIPTION::", description);
     const videoLocalPath = req.files?.["videoFile"][0].path;
     const thumbnailLocalPath = req.files?.["thumbnail"][0].path;
 
@@ -235,6 +201,7 @@ const deleteVideo = asyncHandler( async(req, res) => {
     .json(
         new ApiResponse(
             200,
+            {},
             "Video deleted successfully"
         )
     )
@@ -266,11 +233,39 @@ const viewIncrement = asyncHandler( async(req, res) => {
     )
 } )
 
+const togglePublish = asyncHandler( async(req, res) => {
+    console.log("toggling publish");
+    
+    const {videoId} = req.params;   
+    const video = await Video.findOne( {
+        _id: videoId,
+        owner: new mongoose.Types.ObjectId(req.user._id)
+    } );
+    console.log("VIDEO", video);
+    
+    if( !video ){
+        throw new ApiError(404, "video not found or unauthorised user")
+    }
+    video.isPublished = !video.isPublished;
+    await video.save();
+    return res
+    .status(200)
+    .json(  
+        new ApiResponse(
+            200,
+            video,
+            `video ${ video.isPublished ? "published" : "unpublished"} successfully`
+        )
+    )
+    }
+)
+
 export {
     getAllVideos,
     publishAVideo,
     getVideoById,
     updateVideo,
     deleteVideo,
-    viewIncrement
+    viewIncrement,
+    togglePublish
 }
