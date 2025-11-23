@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import CommentTweetCard from './CommentTweetCard'
+import {useSelector} from 'react-redux'
 
 function TweetDisplay({type}) {
     const [tweets, setTweets] = useState([])
     const [tweet, setTweet] = useState("")
+    const user = useSelector( (state) => state.auth.userData )
+    const status = useSelector( (state) => state.auth.status )
 
     const getAllTweets = async () => {
         try {
@@ -61,7 +64,7 @@ function TweetDisplay({type}) {
             ) )
         }
         </div>
-        <div className='' > 
+        { ((user._id==type) || ( type=="all-tweets" && status==true )) && (<div className='' > 
             <form
             className='flex gap-4 w-full'
             onSubmit={ (e) => publishATweet(e) } action="submit">
@@ -77,7 +80,7 @@ function TweetDisplay({type}) {
               disabled={!tweet.length}
               >Post</button>
             </form> 
-        </div>
+        </div>)}
     </div>
   )
 }

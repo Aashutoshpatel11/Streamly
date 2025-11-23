@@ -408,7 +408,7 @@ const updateCoverImage = asyncHandler( async(req, res) => {
 } )
 
 const getUserChannelProfile = asyncHandler( async(req, res) => {
-    let {username} = req.params;
+    let {username} = req.params
     username = username.trim().toLowerCase();
     console.log("username:", username);
     
@@ -468,7 +468,7 @@ const getUserChannelProfile = asyncHandler( async(req, res) => {
                         $size: "$subscribedTo"
                     },
                     "isSubscribed": {
-                        $eq: ["$subscriptions.subscriber", req.user._id]
+                        $eq: ["$subscriptions.subscriber", req.user?._id]
                     }
                 }
             }

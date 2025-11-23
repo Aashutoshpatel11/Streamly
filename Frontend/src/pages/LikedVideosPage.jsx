@@ -32,6 +32,7 @@ function LikedVideosPage() {
                 Liked Videos
             </h1>
         </header>
+        <div className='divider' ></div>
         {
             likedVideos.map( (item) => (
                 <VideoCardHorizontal 

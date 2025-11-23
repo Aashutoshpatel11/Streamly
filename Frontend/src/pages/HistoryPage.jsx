@@ -29,6 +29,7 @@ function HistoryPage() {
                 Watch History
             </h1>
         </header>
+        <div className='divider' ></div>
         {
             watchHistory && watchHistory.map( (item) => (
                 <VideoCardHorizontal 
