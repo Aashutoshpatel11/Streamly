@@ -234,14 +234,14 @@ const viewIncrement = asyncHandler( async(req, res) => {
 } )
 
 const togglePublish = asyncHandler( async(req, res) => {
-    console.log("toggling publish");
+    // console.log("toggling publish");
     
     const {videoId} = req.params;   
     const video = await Video.findOne( {
         _id: videoId,
         owner: new mongoose.Types.ObjectId(req.user._id)
     } );
-    console.log("VIDEO", video);
+    // console.log("VIDEO", video);
     
     if( !video ){
         throw new ApiError(404, "video not found or unauthorised user")

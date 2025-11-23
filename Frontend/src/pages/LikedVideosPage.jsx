@@ -37,7 +37,7 @@ function LikedVideosPage() {
                 <VideoCardHorizontal 
                 key={item.video?._id}
                 thumbnail={item.video?.thumbnail}
-                title={item.video?.title}
+                title={item.video?.title || "DELETED VIDEO"}
                 channelName={item.video?.owner?.username}
                 views={item.video?.views}
                 createdAt={item.video?.createdAt}

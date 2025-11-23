@@ -33,7 +33,7 @@ const createTweet = asyncHandler(async (req, res) => {
 })
 
 const getAllTweets = asyncHandler( async(req, res) => {
-    const tweets = await Tweet.find({})
+    const tweets = await Tweet.find({}).populate('owner')
     if(!tweets){
         throw new ApiError(401, "No tweeta posted yet")
     }
@@ -50,11 +50,11 @@ const getAllTweets = asyncHandler( async(req, res) => {
 } )
 
 const getUserTweets = asyncHandler(async (req, res) => {
-    console.log(req.user._id)
+    const {userId} = req.params
     
     const tweets = await Tweet.find(
         {
-            owner: req.user._id
+            owner: userId
         }
     )
 

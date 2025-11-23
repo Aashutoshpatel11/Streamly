@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router';
 import VideoCard from '../components/VideoCard';
 import SubscribeBtn from '../assets/SubscribeBtn';
+import TweetDisplay from '../components/TweetDisplay';
 
 const ChannelPage = () => {
     const [activeTab, setActiveTab] = useState('videos');
@@ -16,7 +17,7 @@ const ChannelPage = () => {
 
     const tabs = [
         { id: 'videos', name: 'Videos' },
-        { id: 'playlists', name: 'Playlists' },
+        { id: 'tweets', name: 'Tweets' },
         { id: 'about', name: 'About' },
     ];
 
@@ -24,15 +25,20 @@ const ChannelPage = () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/c/${username}`, {withCredentials: true});
             setUserChannelData(response.data.data)
+            console.log("CHanneldata:", userChannelData);
+            
         } catch (error) {
             console.error("Error fetching channel profile:", error);
             throw new Error(error.message);
         }
     }
 
+    useEffect( () => {
+        console.log("Username from params:", userChannelData);
+    }, [userChannelData] )
+
     useEffect(() => {
         getChannelProfile();
-        
     }, [username]);
 
     return (
@@ -90,7 +96,7 @@ const ChannelPage = () => {
 
             <div className='divider' ></div>
 
-            <nav className=" border-gray-200 dark:border-gray-700 sticky top-0 bg-gray-50 dark:bg-base-100 z-10">
+            <nav className=" border-gray-200 dark:border-gray-700 sticky top-0 bg-gray-50 dark:bg-base-100 z-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex space-x-6 overflow-x-auto whitespace-nowrap">
                         {tabs.map((tab) => (
@@ -132,10 +138,10 @@ const ChannelPage = () => {
                     </div>
                 )}
 
-                {activeTab === 'playlists' && (
-                    <div className="text-center py-12">
-                        Playlists coming soon...
-                    </div>
+                {activeTab === 'tweets' && (
+                    <TweetDisplay 
+                    type= {userChannelData?._id }
+                    />
                 )}
 
                 {activeTab === 'about' && (
@@ -144,9 +150,9 @@ const ChannelPage = () => {
                         <p className="text-gray-600 dark:text-gray-300">
                             Joined on: {new Date(userChannelData?.createdAt).toLocaleDateString()}
                         </p>
-                        <p className="mt-4 text-gray-600 dark:text-gray-300">
+                        {/* <p className="mt-4 text-gray-600 dark:text-gray-300">
                             Welcome to the channel! We focus on creating engaging video content about technology and development.
-                        </p>
+                        </p> */}
                     </div>
                 )}
             </main>
