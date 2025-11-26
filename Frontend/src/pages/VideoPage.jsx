@@ -14,7 +14,7 @@ function VideoPage() {
   const [subscribedChannels, setSubscribedChannels] = useState([])
   const {videoId} = useParams()
   const [comment, setComment] = useState("")
-  const [videoComment, setVideoComments] = useState([])
+  const [videoComments, setVideoComments] = useState([])
 
   const userStatus = useSelector( (state) => state.auth.status )
   
@@ -116,7 +116,7 @@ function VideoPage() {
               <input 
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className='border-b-2 border-black w-full bg-transparent focus:outline-none pb-2 text-white/80' 
+              className={`border-b-2 border-black w-full bg-transparent focus:outline-none pb-2 text-white/80 ${comment.length && "border-info"} transition ease-out duration-500 ` } 
               type="text" 
               placeholder='Add a comment...' />
               <button 
@@ -128,15 +128,20 @@ function VideoPage() {
 
           </div>
           {
-            videoComment && [...videoComment].reverse().map( (comment) => (
+            videoComments && [...videoComments].reverse().map( (comment) => (
               <CommentTweetCard 
               key={comment?.createdAt}
-              type="comment?"  
+              id={comment._id}
+              ownerId={comment?.owner?._id}
+              type="comment"  
               avatar={comment?.owner?.avatar} 
               username={comment?.owner?.username}
-              createdAt={comment?.createdAt}
+              updatedAt={comment?.updatedAt}
               content={comment?.content}
-              likes="0"/>
+              likes="0"
+              videoComments={videoComments}
+              setVideoComments={setVideoComments}
+              />
             ) )
           }
           <div className='divider' ></div>

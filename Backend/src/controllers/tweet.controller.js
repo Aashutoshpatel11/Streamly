@@ -56,7 +56,7 @@ const getUserTweets = asyncHandler(async (req, res) => {
         {
             owner: userId
         }
-    )
+    ).populate('owner')
 
     if(!tweets.length){
         throw new ApiError(401, "No tweets found for this user")

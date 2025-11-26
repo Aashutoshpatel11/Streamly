@@ -101,8 +101,9 @@ const updateComment = asyncHandler(async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            updatedComment,
             "Comment updated successfully",
-            updatedComment
+            
         )
     )
 
@@ -115,7 +116,7 @@ const deleteComment = asyncHandler(async (req, res) => {
 
     if(!comment){
         throw new ApiError(
-            401, "Comment not deleted due to some reason! Please Retry after sometime"
+            401,comment, "Comment not deleted due to some reason! Please Retry after sometime"
         )
     }
 

@@ -54,12 +54,16 @@ function TweetDisplay({type}) {
             tweets && [...tweets].reverse().map( (tweet) => (
                 <CommentTweetCard 
                 key={tweet.createdAt}
+                id={tweet._id}
+                ownerId={tweet.owner?._id}
                 type="tweet"
                 avatar={tweet.owner?.avatar}
                 username={tweet.owner?.username}
-                createdAt={tweet.createdAt}
+                updatedAt={tweet.updatedAt}
                 content={tweet.content}
                 likes={"Likes"}
+                tweets={tweets}
+                setTweets={setTweets}
                 />
             ) )
         }
