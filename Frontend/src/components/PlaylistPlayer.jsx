@@ -1,8 +1,17 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import timeAgo from '../utils/TimeAgo'
 import { Link } from 'react-router'
 
 function PlaylistPlayer({name, description, createdAt, videos}) {
+    const [totalduration, setTotalDuration] = useState(0)
+
+    useEffect(() => {
+        if (videos && videos.length > 0) {
+            const total = videos.reduce((acc, video) => acc + (video.duration || 0), 0);
+            setTotalDuration(total);
+        }
+    }, [videos]);
+
   return (
     <div className="flex justify-center items-center min-h-screen p-4">
         <div className="bg-base-300 rounded-xl shadow-2xl overflow-hidden w-full max-w-sm md:max-w-3xl lg:max-w-4xl transition-all duration-300">
@@ -33,7 +42,7 @@ function PlaylistPlayer({name, description, createdAt, videos}) {
                     </h2>
 
                     {
-                        videos && videos.length>0 ? videos.map( (video, index) => 
+                        videos && videos.length>0 ? videos.map( (video, index) =>
                             (<Link key={video._id} to={`/video/${video._id}`} >
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between p-3 rounded-lg bg-base-100 transition duration-150 cursor-pointer">
@@ -52,7 +61,10 @@ function PlaylistPlayer({name, description, createdAt, videos}) {
                     }
                     
                     <p className="text-center text-sm text-white/50 mt-6 pt-4 border-t">
-                        {"Total Runtime: 45 min"}
+                        {`Total Runtime: 
+                        ${Math.floor(totalduration/3600)>0? Math.floor(totalduration/3600) + "hour :": "" }
+                        ${Math.floor(totalduration/60)>0? Math.floor(totalduration/60) + "min :": ""  }
+                        ${Math.floor(totalduration%60)>0? Math.floor(totalduration%60) + " sec" :""}`}
                     </p>
 
                 </div>

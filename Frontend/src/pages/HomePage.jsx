@@ -11,6 +11,7 @@ function HomePage() {
     const [activeTab, setActiveTab] = useState('videos');
     const [videos, setVideos] = useState([])
     const dispatch = useDispatch()
+    const [openPopupId, setOpenPopupId] = useState(null);
 
     const getAllVideos =  async() => {
       const response = await GetAllVideos()
@@ -35,7 +36,7 @@ function HomePage() {
       <HeroSection/>
       {/* <div className='divider' ></div> */}
       <div className='w-full px-4 sm:px-6 lg:px-8 pb-10 ' >
-        <nav className=" mt-6 border-gray-200 dark:border-gray-700 sticky mb-10  top-0 bg-gray-50 dark:bg-base-100 z-8">
+        <nav className="w-full mt-6 border-gray-200 dark:border-gray-700 sticky mb-10  top-0 bg-gray-50 dark:bg-base-100 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex space-x-6 overflow-x-auto whitespace-nowrap">
                         {tabs.map((tab) => (
@@ -72,6 +73,8 @@ function HomePage() {
               videoId={video._id} 
               createdAt={video.createdAt}
               ownerId={video.owner?._id}
+              openPopupId={openPopupId}
+              setOpenPopupId={setOpenPopupId}
               />
             ) )
           }

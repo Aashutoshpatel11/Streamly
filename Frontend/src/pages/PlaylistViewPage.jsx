@@ -13,7 +13,7 @@ function PlaylistViewPage() {
             if(response){
                 setPlaylist(response.data.data);
             }
-            console.log("response",response.data.data);
+            // console.log("response",response.data.data);
             return response
         } catch (error) {
             console.log("Error fetching playlist detaisl", error.message);

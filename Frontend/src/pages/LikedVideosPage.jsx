@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import VideoCardHorizontal from '../components/VideoCardHorizontal';
+import AddToPlaylist from '../components/AddToPlaylist';
 
 function LikedVideosPage() {
     const [likedVideos, setLikedVideos] = useState([])
@@ -27,10 +28,11 @@ function LikedVideosPage() {
 
   return (
     <div className='w-full h-full p-10 md:px-12 lg:px-14 xl:px-30' >
-        <header className="mb-8">
+        <header className="relative mb-8">
             <h1 className="text-3xl font-extrabold ">
                 Liked Videos
             </h1>
+            <AddToPlaylist />
         </header>
         <div className='divider' ></div>
         {
@@ -48,6 +50,7 @@ function LikedVideosPage() {
                 />
             ) )
         }
+        
     </div>
   )
 }
