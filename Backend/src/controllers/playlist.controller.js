@@ -61,8 +61,9 @@ const getUserPlaylists = asyncHandler( async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            playlists,
             "Playlists fetched successfully",
-            playlists
+            
         )
     )
 
@@ -73,7 +74,7 @@ const getPlaylistById = asyncHandler( async (req, res) => {
     console.log(playId);
     
     
-    const playlist = await Playlist.findById(playId)
+    const playlist = await Playlist.findById(playId).populate('videos')
 
     if(!playlist){
         throw new ApiError(
@@ -87,15 +88,16 @@ const getPlaylistById = asyncHandler( async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            playlist,
             "playlist fetched successfully",
-            playlist
+            
         )
     )
 } )
 
 const addVideoToPlaylist = asyncHandler( async (req, res) => {
     let {Id} = req.params
-    console.log(Ids);
+    // console.log(Ids);
     
 
     const Ids = Id.split("-")
@@ -149,8 +151,9 @@ const addVideoToPlaylist = asyncHandler( async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            updatedPlaylist,
             "Playlist updated successsfully",
-            updatedPlaylist
+            
         )
     )
 
@@ -196,8 +199,9 @@ const removeVideoFromPlaylist = asyncHandler( async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            updatedPlaylist,
             "video removed successfully",
-            updatedPlaylist
+            
         )
     )
 
@@ -218,8 +222,9 @@ const deletePlaylist = asyncHandler( async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            playlist,
             "playlist deleted successfully",
-            playlist
+            
         )
     )
 } )
@@ -257,8 +262,9 @@ const updatePlaylist = asyncHandler( async (req, res) => {
     .json(
         new ApiResponse(
             200,
+            playlist,
             "Playlist updated successfully",
-            playlist
+            
         )
     )
 } )

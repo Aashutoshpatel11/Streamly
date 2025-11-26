@@ -18,6 +18,7 @@ import HistoryPage from './pages/HistoryPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import ChannelPage from './pages/ChannelPage.jsx'
 import PlaylistPage from './pages/PlaylistPage.jsx'
+import PlaylistViewPage from './pages/PlaylistViewPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -32,6 +33,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/dashboard/:userId' element= {<DashboardPage />} />
             <Route path='/Channel/:username' element= {<ChannelPage />} />
             <Route path='/playlist' element= {<PlaylistPage />} />
+            <Route path='/playlist/user-playlists/:id' element= {<PlaylistViewPage />} />
           </Route>
           <Route path='/signup'element={<SignupPage />} ></Route>
           <Route path='/login'element={<LoginPage />} ></Route>
