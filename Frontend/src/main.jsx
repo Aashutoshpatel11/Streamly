@@ -31,7 +31,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/liked-videos' element= {<LikedVideosPage />} />
             <Route path='/history' element= {<HistoryPage />} />
             <Route path='/dashboard/:userId' element= {<DashboardPage />} />
-            <Route path='/Channel/:username' element= {<ChannelPage />} />
+            <Route path='/Channel/:id' element= {<ChannelPage />} />
             <Route path='/playlist' element= {<PlaylistPage />} />
             <Route path='/playlist/user-playlist/:id' element= {<PlaylistViewPage />} />
           </Route>

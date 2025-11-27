@@ -63,13 +63,14 @@ function HomePage() {
           {
             videos.map( (video) => (
               <VideoCard 
+              channelId={video.owner?._id}
               key={video._id} 
               src={video.thumbnail}  
               title={video.title}
               views={Math.floor(video.views)} 
               duration={video.duration}
-              channelImageSrc={video.owner.avatar} 
-              channelName={video.owner.username}
+              channelImageSrc={video.owner?.avatar} 
+              channelName={video.owner?.username}
               videoId={video._id} 
               createdAt={video.createdAt}
               ownerId={video.owner?._id}

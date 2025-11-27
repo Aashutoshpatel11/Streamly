@@ -42,7 +42,7 @@ userRoute.route("/current-user").get(verifyJWT, getCurrentUser)
 userRoute.route("/update-account").patch(verifyJWT, updateAccountDetails)
 userRoute.route("/avatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
 userRoute.route("/cover-image").patch(verifyJWT,upload.single("coverImage"),updateCoverImage)
-userRoute.route("/c/:username").get( getUserChannelProfile)
+userRoute.route("/c/:id").get( getUserChannelProfile)
 userRoute.route("/watch-history").get(verifyJWT, getUserWatchHistory)
 userRoute.route("/add-to-watch-history/:videoId").get(verifyJWT, addVideoToWatchHistory )
  

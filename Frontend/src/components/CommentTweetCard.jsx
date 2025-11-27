@@ -54,6 +54,7 @@ function CommentTweetCard({id, ownerId, type, avatar, username, updatedAt, conte
     const handleDelete = async () => {
       if(isEditing){
         setIsEditing(false)
+        setNewContent(content)
       }else{
         if(type=="tweet"){
           try {

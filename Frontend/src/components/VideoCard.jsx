@@ -5,6 +5,7 @@ import AddToPlaylist from './AddToPlaylist';
 import { HiDotsVertical } from 'react-icons/hi';
 
 function VideoCard({
+  channelId,
   src,
   title,
   views,
@@ -55,7 +56,7 @@ function VideoCard({
           <span
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/Channel/${channelName}`);
+              navigate(`/Channel/${channelId}`);
             }}
             className="text-white/80 hover:underline text-sm"
           >

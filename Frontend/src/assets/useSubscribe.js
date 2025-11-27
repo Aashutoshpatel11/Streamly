@@ -10,6 +10,7 @@ export default function useSubscribe(channelId) {
     
     const userId = useSelector( (state) => state.auth.userData._id )
     
+    console.log("CHannel ID",channelId);
     
     
 // TOGGLE SUBSCRIPTION BUTTON
@@ -19,6 +20,11 @@ export default function useSubscribe(channelId) {
             // console.log("toggleSubscribe::RESPONSE::", response);
             
             if(response){
+                if(isSubscribed){
+                    setSubscriberCount( prev => prev-1 )
+                }else{
+                    setSubscriberCount( prev => prev+1 )
+                }
                 setIsSubscribed(isSubscribed? false : true )
             }
             return response
@@ -76,8 +82,10 @@ export default function useSubscribe(channelId) {
     }, [isSubscribed] )
     return {
         subscriberCount,
+        setSubscriberCount,
         subscriber,
         isSubscribed,
+        setIsSubscribed,
         subscribedChannels,
         toggleSubscribe
     }

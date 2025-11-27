@@ -2,13 +2,15 @@ import React, { useState, useEffect, use } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import VideoCard from '../components/VideoCard';
-import SubscribeBtn from '../assets/SubscribeBtn';
+import useSubscribe from '../assets/useSubscribe';
 import TweetDisplay from '../components/TweetDisplay';
 
 const ChannelPage = () => {
     const [activeTab, setActiveTab] = useState('videos');
-    const {username} = useParams()
+    const {id} = useParams()
     const [userChannelData, setUserChannelData] = useState(null);
+    const {subscriberCount, setSubscriberCount, isSubscribed , toggleSubscribe } = useSubscribe(id)
+    
     const formatNumber = (num) => {
         if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
         if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
@@ -23,10 +25,12 @@ const ChannelPage = () => {
 
     const getChannelProfile = async() => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/c/${username}`, {withCredentials: true});
-            setUserChannelData(response.data.data)
-            console.log("CHanneldata:", userChannelData);
+            const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/c/${id}`, {withCredentials: true});
             
+            // setSubscriberCount( response.data.data.subscribers )
+            // setIsSubscribed(response.data.data.isSubscribed)
+            console.log("CHanneldata:", userChannelData);
+            setUserChannelData(response.data.data)
         } catch (error) {
             console.error("Error fetching channel profile:", error);
             throw new Error(error.message);
@@ -34,12 +38,12 @@ const ChannelPage = () => {
     }
 
     useEffect( () => {
-        console.log("Username from params:", userChannelData);
+        console.log("Username from params:", userChannelData)
     }, [userChannelData] )
 
     useEffect(() => {
         getChannelProfile();
-    }, [username]);
+    }, [id]);
 
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-base-100 text-gray-900 dark:text-white">
@@ -69,7 +73,17 @@ const ChannelPage = () => {
                 </div>
 
                 <div className="absolute bottom-4 right-4 sm:right-6 lg:right-8">
-                    { userChannelData?._id && <SubscribeBtn channelId={userChannelData?._id} />}
+                    { userChannelData?._id && userChannelData._id && 
+                    (
+                        <button
+                        className={`btn rounded-full btn-md text-black ${isSubscribed? 'bg-white' : 'bg-error'} hover:bg-white/50`}
+                        type="button"
+                        onClick={() => {
+                            toggleSubscribe()
+                        }}
+                        >{isSubscribed? 'Unsubscribe' : 'Subscribe' }</button>
+                    )
+                    }
                 </div>
             </div>
 
@@ -84,7 +98,7 @@ const ChannelPage = () => {
             <div className="px-4 sm:px-6 lg:px-8 mt-4 sm:mt-0 pb-4"> {/* Adjusted mt-4 / sm:mt-0 */}
                 <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                     <span>
-                        <span className="font-bold">{formatNumber(userChannelData?.subscribers)}</span> Subscribers
+                        <span className="font-bold">{formatNumber(subscriberCount)}</span> Subscribers
                     </span>
                     <span>•</span>
                     <span>
