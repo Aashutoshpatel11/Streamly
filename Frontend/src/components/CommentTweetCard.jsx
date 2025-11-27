@@ -6,11 +6,18 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { FaTelegramPlane } from "react-icons/fa";
 import { MdOutlineCancel } from "react-icons/md";
 import axios from 'axios';
+import useLike from '../assets/useLike';
+import { TbThumbUp } from "react-icons/tb";
+import { TbThumbUpFilled } from "react-icons/tb";
 
 function CommentTweetCard({id, ownerId, type, avatar, username, updatedAt, content, likes, tweets=[], setTweets, videoComments=[], setVideoComments }) {
     const [isEditing, setIsEditing] = useState(false)
     const [newContent, setNewContent] = useState('')
     const userId = useSelector( (state) => state.auth.userData._id )
+    const {isLiked, setIsLiked, likedEntities, setLikedEntities, likeCount, setLikeCount, toggleLike} = useLike({
+      type: type,
+      entityId: id
+    })
 
     const handleEditClick = async () => {
       if( isEditing ){
@@ -96,7 +103,7 @@ function CommentTweetCard({id, ownerId, type, avatar, username, updatedAt, conte
                     </div> 
                 </div>
                 <div className="chat-header">
-                    {username}
+                    @{username}
                     <time className="text-xs opacity-50">{timeAgo(updatedAt)}</time>
                 </div>
                 {
@@ -112,7 +119,15 @@ function CommentTweetCard({id, ownerId, type, avatar, username, updatedAt, conte
                 }
 
 
-                {/* <div className="chat-footer opacity-50">{"likes"}</div> */}
+                <div className="chat-footer text-[18px] font-semibold  opacity-50">
+                  <button 
+                  className='cursor-pointer'
+                  onClick={()=>toggleLike({"type":type, "entityId":id})} 
+                  type="button">
+                    {isLiked? <TbThumbUpFilled/> : <TbThumbUp/>}
+                  </button> 
+                  {likeCount? likeCount: ""}
+                </div>
             </div>
             {
               ownerId==userId && (

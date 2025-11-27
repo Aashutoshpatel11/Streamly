@@ -3,46 +3,54 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 
 
-export default function useLike(type, id) {
-    const [isLiked, setIsLiked] = useState(false)
-    const currentUser = useSelector( (state) => state.auth.userData )
-    
+export default function useLike({type, entityId}) {
+  const currentUser = useSelector( (state) => state.auth.userData )
+  const [isLiked, setIsLiked] = useState(false)
+  const [likedEntities, setLikedEntities] = useState([])
+  const [likeCount, setLikeCount] = useState(0)
 
-
-
-    // TOGGLE LIKE
-  const toggleLike = async () => {
+  // GET LIKED ENTITIES
+  const getLikedEntities = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/like/toggle-${type}Like/${id}`,{},{withCredentials:true})
-      console.log("Toggle Like Response::", response);
-      setIsLiked( prev => !prev )
-      return response
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/like/getLikedEntities/${entityId}`)
+      if(response){
+        setLikedEntities(response.data.data)
+        setLikeCount(response.data.data.length)
+        setIsLiked( response.data.data.filter( (item) => item.likedBy==currentUser._id ).length? true: false )
+      }
     } catch (error) {
-      console.log("TOGGLE LIKE::ERROR::", error.message);
-      throw new Error(error);
-    }
-  } 
-
-
-// CHECK IS LIKED
-  const checkIsLiked = async() => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/like/getLikedVideos`, {withCredentials:true})
-      setIsLiked( response.data?.data?.find( (item) => item.likedBy == currentUser._id && item.video?._id==id )? true : false )
-      return response
-    } catch (error) {
-      console.log("CHECK IS LIKED::ERROR::", error.message);
-      throw new Error(error);
+      console.log("GET LIKED ENTITIES :: ERROR :: ", error.message);
+      throw new Error(error)
     }
   }
 
   useEffect( () => {
-    checkIsLiked()
-  }, [] )
+    getLikedEntities()
+  }, [entityId] )
 
 
-    return {
-        isLiked,
-        toggleLike
+  // TOGGLE LIKE
+  const toggleLike = async ({type, entityId}) => {
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/like/toggle-${type}Like/${entityId}`,{}, {withCredentials: true})
+        if(response){
+          getLikedEntities()
+        }
+        return response
+    } catch (error) {
+      console.log("TOGGLE LIKE :: ERROR :: ", error.message);
+      throw new Error(error)
     }
+  }
+
+
+  return {
+  isLiked,
+  setIsLiked,
+  likedEntities,
+  setLikedEntities,
+  likeCount,
+  setLikeCount,
+  toggleLike
+  }
 }

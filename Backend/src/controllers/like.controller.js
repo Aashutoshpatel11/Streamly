@@ -3,7 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import { Like } from "../models/like.model.js";
 import { Video } from "../models/video.model.js";
-import { Comment } from "../models/comment.model.js";
+import { Comment } from "../models/comment.model.js"; 
 import { Tweet } from "../models/tweet.model.js";
 
 const toggleVideoLike = asyncHandler( async(req, res) => {
@@ -156,9 +156,33 @@ const getLikedVideos = asyncHandler( async(req, res) => {
     )
 } ) 
 
+const getLikedEntities = asyncHandler( async(req, res) => {
+    // const ownerId = req.user._id
+    const {entityId} = req.params
+
+    const entities = await Like.find(
+        {$or: [
+            {"video": entityId},
+            {"comment": entityId},
+            {"tweet": entityId}
+        ]}
+    )
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+            200,
+            entities,
+            "Liked Entitites fetched successfully"
+        )
+    )
+} )
+
 export{
     toggleVideoLike,
     toggleCommentLike,
     toggleTweetLike,
-    getLikedVideos
+    getLikedVideos,
+    getLikedEntities
 }

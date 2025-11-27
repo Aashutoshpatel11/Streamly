@@ -75,7 +75,7 @@ function Header() {
                     tabIndex="-1"
                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                     <li>
-                    <Link to={`/Channel/${user.username}`}  className="justify-between">My Channel
+                    <Link to={`/Channel/${user._id}`}  className="justify-between">My Channel
                     </Link>
                     </li>
                     <li>

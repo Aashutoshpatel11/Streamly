@@ -58,6 +58,7 @@ function VideoPage() {
         {"content": comment},{withCredentials:true}
       )
       getVideoComments()
+      setComment("")
     } catch (error) {
       console.log("PUBLISH A COMMENT::ERROR::", error.message);
       throw new Error(error);
@@ -119,6 +120,10 @@ function VideoPage() {
               className={`border-b-2 border-black w-full bg-transparent focus:outline-none pb-2 text-white/80 ${comment.length && "border-info"} transition ease-out duration-500 ` } 
               type="text" 
               placeholder='Add a comment...' />
+              { comment.length? 
+              <button 
+              onClick={ () => setComment("") }
+              className='btn btn-error rounded-full' >Cancel</button>: ""}
               <button 
               className='btn btn-info rounded-full' 
               type="submit"

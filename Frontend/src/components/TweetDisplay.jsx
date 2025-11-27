@@ -78,6 +78,12 @@ function TweetDisplay({type}) {
               className={`border-b-2 border-black w-full bg-transparent focus:outline-none pb-2 text-white/80 ${tweet.length && "border-info"} transition ease-out duration-500 ` }
               type="text" 
               placeholder='Add a Tweet...' />
+
+              { tweet.length? 
+              <button 
+              onClick={ () => setTweet("") }
+              className='btn btn-error rounded-full' >Cancel</button>: ""}
+
               <button 
               className='btn btn-info rounded-full' 
               type="submit"

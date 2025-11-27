@@ -36,7 +36,7 @@ function HomePage() {
       <HeroSection/>
       {/* <div className='divider' ></div> */}
       <div className='w-full px-4 sm:px-6 lg:px-8 pb-10 ' >
-        <nav className="w-full mt-6 border-gray-200 dark:border-gray-700 sticky mb-10  top-0 bg-gray-50 dark:bg-base-100 z-50">
+        <nav className="w-full mt-6 border-gray-200 dark:border-gray-700 sticky mb-10  top-0 bg-gray-50 dark:bg-base-100 z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex space-x-6 overflow-x-auto whitespace-nowrap">
                         {tabs.map((tab) => (
