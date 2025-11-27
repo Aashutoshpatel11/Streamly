@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { AiOutlineDelete } from "react-icons/ai";
 import VideoUploadForm from '../components/VideoUploadForm';
+import { toast } from 'react-toastify';
 
 const MetricCard = ({ title, value }) => (
     <div className=" p-4 rounded-lg shadow-md border border-gray-100  dark:border-gray-700">
@@ -55,8 +56,16 @@ export default function DashboardPage() {
         
         try {
             const response = await axios.delete( `${import.meta.env.VITE_SERVER_URL}/video/delete/${videoId}`,{withCredentials: true} )
-            console.log("DELETE VIDEO::", response.data.data);
-            getChannelVideos()
+            // console.log("DELETE VIDEO::", response.data.data);
+            if(response){
+                toast.info("Video Deleted", {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "dark",
+                });
+                getChannelVideos()
+                getDashboardStats()
+            }
         } catch (error) {
             console.log("DELETE VIDEO::ERROR",error.message);
             throw new Error(error)

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import PlaylistCard from '../components/PlaylistCard'
+import { toast } from 'react-toastify'
 
 function PlaylistPage() {
   const [newPlaylist, setNewPlaylist] = useState({
@@ -49,6 +50,11 @@ function PlaylistPage() {
       try {
           const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/playlist/delete/${_id}`, {withCredentials: true})
           getPlaylists()
+          toast.info("Playlist deleted", {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "dark",
+          });
           return response
       } catch (error) {
           console.error('Error deleting playlist:', error)

@@ -134,9 +134,14 @@ const addVideoToPlaylist = asyncHandler( async (req, res) => {
     const existingVideo = playlist.videos.find( (video) => video._id == videoId )
 
     if(existingVideo){
-        throw new ApiError(
-            401,
-            "playlist already has this video in it"
+        return res
+        .status(201)
+        .json(
+            new ApiResponse(
+                201,
+                playlist,
+                "Video Already Exits"
+            )
         )
     }
 
@@ -152,7 +157,7 @@ const addVideoToPlaylist = asyncHandler( async (req, res) => {
         new ApiResponse(
             200,
             updatedPlaylist,
-            "Playlist updated successsfully",
+            "Video added successsfully",
             
         )
     )

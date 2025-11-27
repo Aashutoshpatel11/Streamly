@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import timeAgo from '../utils/TimeAgo';
 import AddToPlaylist from './AddToPlaylist';
 import { HiDotsVertical } from 'react-icons/hi';
+import { useSelector } from 'react-redux';
 
 function VideoCard({
   channelId,
@@ -17,7 +18,7 @@ function VideoCard({
   openPopupId,
   setOpenPopupId
 }) {
-
+  const userStatus = useSelector( (state) => state.auth.status ) 
   const navigate = useNavigate();
   const isOpen = openPopupId === videoId;
 
@@ -75,9 +76,11 @@ function VideoCard({
         className="absolute top-2 right-2 z-20"
         onClick={handleTogglePopup}
       >
+        {userStatus && 
         <div className="hover:bg-white/70 rounded-full p-2 z-0">
           <HiDotsVertical />
         </div>
+        }
 
         {isOpen && (
           <AddToPlaylist

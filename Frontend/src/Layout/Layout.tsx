@@ -3,6 +3,7 @@ import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import { NavLink, Outlet } from 'react-router'
 import { useSelector } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
 
 function Layout() {
     const [userStatus, setUserStatus] = useState()
@@ -74,7 +75,8 @@ function Layout() {
             </ul>
             </div>
         </div>
-        </div>
+        <ToastContainer />
+    </div>
   )
 }
 

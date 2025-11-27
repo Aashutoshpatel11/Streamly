@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 function AddToPlaylist({ onClose, videoId }) {
     const [playlists, setPlaylists] = useState([])
@@ -34,6 +35,11 @@ function AddToPlaylist({ onClose, videoId }) {
                 {},
                 {withCredentials: true}
             )
+            toast.info(response.data.message, {
+              position: "top-right",
+              autoClose: 5000,
+              theme: "dark",
+            });
             if(response){
                 onClose()
             }
