@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../store/authSlice'
+import { ToastContainer, toast } from 'react-toastify';
 
 function LoginPage() {
     const navigate = useNavigate()
@@ -17,13 +18,18 @@ function LoginPage() {
             setErrorMessage("")
             setProgress(true)
             const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/login`, data, {withCredentials: true})
-            console.log("LOGIN RESPONSE", response);
+            // console.log("LOGIN RESPONSE", response);
             if(response){
                 dispatch(login(response.data.data))
                 navigate('/')
             }
             return response
         } catch (error) {
+            toast.error ('please fill valid credentials', {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "dark",
+            });
             setErrorMessage(error.response.data)
             setProgress(false)
             console.log("LOGGING IN::ERROR::", error);
@@ -70,10 +76,10 @@ function LoginPage() {
                     className='btn btn-soft btn-info mt-5' 
                     disabled={!isValid}
                     >submit</button>
-                    <div className='h-full w-full flex justify-center items-center px-2 text-error text-xs font-semibold ' >{`${errorMessage}`}</div>
                 </div>
             </form>
         </div>
+        <ToastContainer />
     </div>
   )
 }

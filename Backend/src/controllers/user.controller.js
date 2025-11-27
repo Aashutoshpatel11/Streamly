@@ -117,15 +117,15 @@ const loginUser = asyncHandler( async(req, res) => {
 
     const {email, username, password} = req.body
 
-    if(!password) throw new ApiError(404, "password is required")
+    if(!password) throw new ApiError(400, "password is required")
 
-    if(!email && !username ) throw new ApiError(404, "username or email is required")
+    if(!email && !username ) throw new ApiError(400, "username or email is required")
 
     const user = await User.findOne({
         $or: [{email}, {username}]
     })
 
-    if( !user ) throw new ApiError(404, "user not found, please register")
+    if( !user ) throw new ApiError(400, "user not found, please register")
 
     const isPasswordValid = await user.isPasswordCorrect(password);
     

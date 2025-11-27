@@ -35,7 +35,7 @@ function SignupPage() {
             setErrorMessage(error.message)
             setProgress(false)
             // toast.error('User Not Registered...');
-            console.log("ERROR REGISTERING USER::", error.message);
+            console.log("ERROR REGISTERING USER::", error);
             throw new Error(error)
         }
     }
