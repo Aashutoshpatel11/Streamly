@@ -62,7 +62,7 @@ function PlaylistPage() {
             <h1 className="text-3xl font-extrabold ">
                 My Playlists
             </h1>
-            <div className='flex gap-5' >
+            <div className='flex gap-5 transition duration-500' >
 
               <input 
               className='input input-bordered focus:outline-none '
@@ -81,6 +81,15 @@ function PlaylistPage() {
                 return { ...prev, description: e.target.value };
               })}
               placeholder='Description' />
+
+              {(newPlaylist.name.length || newPlaylist.description.length)? 
+              (
+                <button
+                onClick={()=> {
+                  setNewPlaylist({ "name": "", "description": "" })
+                }}
+                className='btn btn-ghost hover:btn-error font-extralight text-white/50'  type="button">x</button>
+              ): "" }
 
               <button 
               disabled={ newPlaylist.name && newPlaylist.description ? false : true }

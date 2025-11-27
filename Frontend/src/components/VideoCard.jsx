@@ -72,10 +72,10 @@ function VideoCard({
       </div>
 
       <div
-        className="absolute top-2 right-2 z-50"
+        className="absolute top-2 right-2 z-20"
         onClick={handleTogglePopup}
       >
-        <div className="hover:bg-white/70 rounded-full p-2">
+        <div className="hover:bg-white/70 rounded-full p-2 z-0">
           <HiDotsVertical />
         </div>
 

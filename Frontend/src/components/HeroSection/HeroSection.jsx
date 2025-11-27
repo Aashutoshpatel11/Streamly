@@ -1,46 +1,35 @@
 import React from 'react'
+import {useNavigate} from 'react-router'
+import {useSelector} from 'react-redux'
 
 function HeroSection() {
-  return (
-    <div className="carousel w-full">
-        <div id="slide1" className="carousel-item relative w-full">
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-            className="w-full" />
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide4" className="btn btn-circle">❮</a>
-            <a href="#slide2" className="btn btn-circle">❯</a>
-            </div>
-        </div>
-        <div id="slide2" className="carousel-item relative w-full">
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-            className="w-full" />
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide1" className="btn btn-circle">❮</a>
-            <a href="#slide3" className="btn btn-circle">❯</a>
-            </div>
-        </div>
-        <div id="slide3" className="carousel-item relative w-full">
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-            className="w-full" />
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide2" className="btn btn-circle">❮</a>
-            <a href="#slide4" className="btn btn-circle">❯</a>
-            </div>
-        </div>
-        <div id="slide4" className="carousel-item relative w-full">
-            <img
-            src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-            className="w-full" />
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-            <a href="#slide3" className="btn btn-circle">❮</a>
-            <a href="#slide1" className="btn btn-circle">❯</a>
-            </div>
-        </div>
-        </div>
-  )
+    const navigate = useNavigate()
+    const status = useSelector( (state) => state.auth.status)
+    return (     
+        <>
+            {status || (<div className="hero bg-base-100 pt-10 pb-10">
+                <div className="hero-content flex-col lg:flex-row-reverse">
+                    <div className="text-center lg:text-left">
+                    <h1 className="text-5xl font-bold">Your Next Obsession is Playing Now.</h1>
+                    <p className="py-6">
+                        Dive into a universe of exclusive originals, blockbuster hits, and timeless classics. With thousands of titles updated weekly, Streamly brings unlimited entertainment right to your screen—no contracts, just pure streaming joy.
+                    </p>
+                    </div>
+                    <div className="card bg-base-300 w-full max-w-sm shrink-0 shadow-2xl p-8">
+                    <div className="card-body items-center justify-center p-0">
+                        <h2 className="card-title text-3xl mb-4">Access Your Account</h2>
+                        <button 
+                        className="btn btn-info btn-lg w-full"
+                        onClick={() => navigate('\login')} 
+                        >
+                        Go to Login
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>)}
+        </>
+    )
 }
 
 export default HeroSection

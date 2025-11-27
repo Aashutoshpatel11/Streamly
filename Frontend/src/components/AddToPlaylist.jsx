@@ -62,7 +62,7 @@ function AddToPlaylist({ onClose, videoId }) {
 
   return (
     <div
-      className="absolute top-10 right-0 w-64 bg-base-100 rounded-lg shadow-xl border border-base-300 p-4 space-y-3 z-50"
+      className="absolute top-10 right-10 w-64 bg-base-100 rounded-lg shadow-xl border border-base-300 p-4 space-y-3 z-20"
       onClick={(e)=> e.stopPropagation()}
     >
       <p className="text-xs font-semibold uppercase opacity-70 border-b pb-1">

@@ -35,25 +35,26 @@ function VideoUploadForm() {
     };
 
   return (
-    <div id='VIDEOFORM' className='hidden z-10 bg-white/10 backdrop-blur-sm top-0 left-0 w-screen h-screen backdrop' >
+    <div id='VIDEOFORM' className='hidden z-60 bg-white/10 backdrop-blur-sm top-0 left-0 w-screen h-screen backdrop' >
         <div className='absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 ' >
         <form 
+        className=''
         onSubmit={handleSubmit(onSubmit)}
         >
-            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-lg border p-4 ">
             <legend className="fieldset-legend">Upload Video</legend>
 
             <label className="label">Title {errors.title && (<span>*this field is required</span>)}</label>
-            <input {...register('title', {required: true} )} type="text" className="input" placeholder="My awesome page" />
+            <input {...register('title', {required: true} )} type="text" className="input w-full" placeholder="Add a title..." />
 
             <label className="label">Description {errors.description && (<span>*this field is required</span>)}</label>
-            <input {...register('description',{required: true})} type="text" className="input" placeholder="my-awesome-page" />
+            <textarea {...register('description',{required: true})} type="text" className="textarea w-full " placeholder="Tell viewers about your video..." />
 
             <label className="label">Video {errors.videoFile && (<span>*this field is required</span>)}</label>
-            <input {...register('videoFile',{required: true})} type="file" className=" file-input file-input-info" placeholder="Name" />
+            <input {...register('videoFile',{required: true})} type="file" className=" file-input file-input-info w-full" placeholder="Name" />
 
             <label className="label">Thumbnail {errors.thumbnail && (<span>*this field is required</span>)} </label>
-            <input {...register('thumbnail',{required: true})} type="file" className=" file-input file-input-info" placeholder="Name" />
+            <input {...register('thumbnail',{required: true})} type="file" className=" file-input file-input-info w-full" placeholder="Name" />
             {progress? <progress className="progress mt-4 w-full"></progress> : <div className='h-2 mt-4 w-full' ></div>}
             <div className=" flex justify-end gap-2">
 
