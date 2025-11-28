@@ -46,56 +46,56 @@ You will need the following installed:
 * MongoDB Instance (Local or Cloud-hosted)
 * Cloudinary Account for media file storage
 
-### 1. Backend Setup
+### Backend Setup
 
-Navigate to the Backend directory:
-```bash
-cd Backend
-```
+1.  **Navigate to the Backend directory:**
+    ```bash
+    cd Backend
+    ```
 
-Install dependencies:
-```bash
-npm install
-```
+2. **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Create a .env file in the Backend directory and add your credentials:
-```Code snippet
-PORT=5400
-CORS_ORIGIN=<Your Frontend URL, e.g., http://localhost:5173>
-DATABASE_URI=<Your MongoDB connection string>
-CLOUDINARY_CLOUD_NAME=<Your Cloudinary Cloud Name>
-CLOUDINARY_API_KEY=<Your Cloudinary API Key>
-CLOUDINARY_API_SECRET=<Your Cloudinary API Secret>
-ACCESS_TOKEN_SECRET=<A strong secret key>
-REFRESH_TOKEN_SECRET=<A strong secret key>
-ACCESS_TOKEN_EXPIRY=1d
-REFRESH_TOKEN_EXPIRY=10d
-```
+3.  **Create a .env file in the Backend directory and add your credentials:**
+    ```env
+    PORT=5400
+    CORS_ORIGIN=<Your Frontend URL, e.g., http://localhost:5173>
+    DATABASE_URI=<Your MongoDB connection string>
+    CLOUDINARY_CLOUD_NAME=<Your Cloudinary Cloud Name>
+    CLOUDINARY_API_KEY=<Your Cloudinary API Key>
+    CLOUDINARY_API_SECRET=<Your Cloudinary API Secret>
+    ACCESS_TOKEN_SECRET=<A strong secret key>
+    REFRESH_TOKEN_SECRET=<A strong secret key>
+    ACCESS_TOKEN_EXPIRY=1d
+    REFRESH_TOKEN_EXPIRY=10d
+    ```
 
-Start the backend development server:
-```bash
-npm run dev # Runs the server using nodemon for automatic restarts.
-```
-The server will be listening at the specified PORT (e.g., http://localhost:5400).
+4. **Start the backend development server:**
+    ```bash
+    npm run dev # Runs the server using nodemon for automatic restarts.
+    ```
+    The server will be listening at the specified PORT (e.g., http://localhost:5400).
 
 
-### 2. Frontend Setup
+### Frontend Setup
 
-Navigate to the Frontend directory:
-```bash
-cd ../Frontend
-```
+1.  **Navigate to the Frontend directory:**
+    ```bash
+    cd ../Frontend
+    ```
 
-Install dependencies:
-```bash
-npm install
-```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Ensure your .env file for the frontend is configured. It should point to the backend API:
-```Code snippet
-VITE_SERVER_URL=http://localhost:5400/api/v1
-```
-Note: This path is used across the application for API calls (e.g., in Frontend/src/assets/GetAllVideos.js).
+3.  **Ensure your .env file for the frontend is configured. It should point to the backend API:**
+    ```Code snippet
+    VITE_SERVER_URL=http://localhost:5400/api/v1
+    ```
+    Note: This path is used across the application for API calls (e.g., in Frontend/src/assets/GetAllVideos.js).
 
 Start the frontend development server:
 ```bash
