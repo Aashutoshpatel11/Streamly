@@ -82,7 +82,7 @@ function VideoPage() {
   }, [])
     
   return (
-    <div className='  xl:flex w-full h-full p-10 gap-10' >
+    <div className='  xl:flex w-full h-full p-2 md:p-10 gap-10' >
       <div className='w-full xl:w-2/3' >
         {
           currentVideo.owner?._id && 
@@ -102,7 +102,7 @@ function VideoPage() {
           <p>{currentVideo && currentVideo.description}</p>
         </div>
         <div className='flex flex-col gap-4' >
-          <h2 className='text-xl font-bold ' >comments: {`count`}</h2>
+          <h2 className='text-xl font-bold ' >comments: {videoComments?.length}</h2>
           <div className='flex gap-4' >
             <div className="w-8 rounded-full">
             <img

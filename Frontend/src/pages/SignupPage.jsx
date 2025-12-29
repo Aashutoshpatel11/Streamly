@@ -47,7 +47,7 @@ function SignupPage() {
   return (
     <div className='h-screen w-screen flex justify-center items-center bg-cover bg-base-300 bg-linear-to-r from-base-300 to-base-100'>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='border border-info/10 shadow-info/10 shadow-md p-10 h-full w-lg rounded-2xl' >
+            <div className='border border-info/10 shadow-info/10 shadow-md p-5 md:p-10 h-full w-auto md:w-lg rounded-2xl' >
                 {progress? <progress className="progress w-full"></progress> : <div className='h-2 w-full' ></div>}
                 <div>
                     <p className='text-sm text-white/50' >start for free</p>

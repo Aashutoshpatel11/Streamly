@@ -57,10 +57,10 @@ function Header() {
   return (
     <div className="navbar bg-base-300 shadow-sm z-40">
         <div className="flex-1">
-            <a className="btn btn-ghost text-xl">Streamly</a>
+            <a href='/' className="btn btn-ghost text-xl">Streamly</a>
         </div>
         <div className="flex gap-2">
-            <input type="text" placeholder="Search" className="input input-bordered w-56 md:w-auto" />
+            <input type="text" placeholder="Search" className="input input-bordered  xs:w-full md:w-full" />
             <div className="dropdown dropdown-end">
             {status? (
                 <div>

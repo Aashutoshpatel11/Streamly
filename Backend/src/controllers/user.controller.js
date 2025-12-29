@@ -29,7 +29,7 @@ const generateAccessAndRefreshToken = async( userId ) => {
 }
 
 const registerUser = asyncHandler( async(req, res)=>{
-    console.log("registering user...");
+    // console.log("registering user...");
     
     // fetch data from frontend -- 
     // validation - non empty --
