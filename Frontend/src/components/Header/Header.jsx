@@ -12,7 +12,7 @@ function Header() {
     const status = useSelector( (state) => state.auth.status )
     const user = useSelector( (state) => state.auth.userData )
     console.log("status", userStatus);
-    console.log("user", user);
+    console.log("user Data", user);
     
 
     useEffect( () => {
