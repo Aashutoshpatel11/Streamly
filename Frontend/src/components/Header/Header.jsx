@@ -11,7 +11,8 @@ function Header() {
     const [userStatus, setUserStatus] = useState()
     const status = useSelector( (state) => state.auth.status )
     const user = useSelector( (state) => state.auth.userData )
-    // console.log("status", userStatus);
+    console.log("status", userStatus);
+    console.log("user", user);
     
 
     useEffect( () => {
