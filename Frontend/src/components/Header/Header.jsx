@@ -61,7 +61,6 @@ function Header() {
             <a href='/' className="btn btn-ghost text-xl">Streamly</a>
         </div>
         <div className="flex gap-2">
-            <input type="text" placeholder="Search" className="input input-bordered  xs:w-full md:w-full" />
             <div className="dropdown dropdown-end">
             {status? (
                 <div>
