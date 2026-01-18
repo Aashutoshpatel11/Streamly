@@ -29,17 +29,6 @@ const generateAccessAndRefreshToken = async( userId ) => {
 }
 
 const registerUser = asyncHandler( async(req, res)=>{
-    // console.log("registering user...");
-    
-    // fetch data from frontend -- 
-    // validation - non empty --
-    // user exist check --
-    // multer middleware--
-    // file - avatar check--
-    // upload on cloudinary--
-    // create user object
-    // entry on db
-    // return res without password and access token
 
     const {email, username, fullname, password} = req.body
 
@@ -56,8 +45,6 @@ const registerUser = asyncHandler( async(req, res)=>{
     }
 
     const avatarLocalPath = await req.files?.["avatar"][0].path;
-    
-    // const coverImageLocalPath = await req.files?.["coverImage"][0].path;
     
     let coverImageLocalPath = "";
 
@@ -77,16 +64,14 @@ const registerUser = asyncHandler( async(req, res)=>{
 
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
-    console.log("AVATAR::", avatar)
-
     const user = await User.create(
         {
             email, 
             username: username.toLowerCase(), 
             fullname, 
             password,
-            avatar: avatar?.secure_url,
-            coverImage: coverImage?.secure_url || "",
+            avatar: avatar?.url,
+            coverImage: coverImage?.url || "",
         }
     )
 
@@ -106,14 +91,6 @@ const registerUser = asyncHandler( async(req, res)=>{
 } ) 
 
 const loginUser = asyncHandler( async(req, res) => {
-    // fetch data from frontend
-    // validate data
-    // store in variable
-    // check data with db call if user exist
-    // password check
-    // generate access and refresh token
-    // update refresh token to user db
-    // return access token (cookies)
 
     console.log("Logging in user");
 
@@ -156,7 +133,6 @@ const loginUser = asyncHandler( async(req, res) => {
             "user logged successfully"
         )
     )
-    // console.log("COOKIES SET AFTER LOGIN::accessToken::", req.cookies.accessToken);
     
     return response
 } )
@@ -411,7 +387,6 @@ const updateCoverImage = asyncHandler( async(req, res) => {
 
 const getUserChannelProfile = asyncHandler( async(req, res) => {
     let {id} = req.params
-    // username = username.trim().toLowerCase();
     console.log("id:", id);
     
 
