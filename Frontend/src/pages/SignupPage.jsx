@@ -24,7 +24,7 @@ function SignupPage() {
             setErrorMessage("")
             setProgress(true)
             // toast.loading('Registering User...');
-            const response = await axios.post(`http://localhost:5400/api/v1/user/register`, formData)
+            const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user/register`, formData)
             console.log(response);
             // toast.success('User Registered');
             if(response){
