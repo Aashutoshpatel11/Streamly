@@ -98,7 +98,7 @@ function VideoPage() {
           />
         }
         <div className='w-full mb-4 bg-neutral text-white/90 text-sm mt-4 rounded-2xl px-4 py-4 pb-8' >
-          <p className='font-semibold text-white mb-2 ' >{currentVideo && `${currentVideo.views} views : ${timeAgo(currentVideo.createdAt)}`}</p>
+          <p className='font-semibold text-white mb-2 ' >{currentVideo && `${Math.floor(currentVideo.views)} views : ${timeAgo(currentVideo.createdAt)}`}</p>
           <p>{currentVideo && currentVideo.description}</p>
         </div>
         <div className='flex flex-col gap-4' >

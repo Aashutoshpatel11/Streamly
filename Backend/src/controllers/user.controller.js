@@ -77,14 +77,16 @@ const registerUser = asyncHandler( async(req, res)=>{
 
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
+    console.log("AVATAR::", avatar)
+
     const user = await User.create(
         {
             email, 
             username: username.toLowerCase(), 
             fullname, 
             password,
-            avatar: avatar?.url,
-            coverImage: coverImage?.url || "",
+            avatar: avatar?.secure_url,
+            coverImage: coverImage?.secure_url || "",
         }
     )
 
